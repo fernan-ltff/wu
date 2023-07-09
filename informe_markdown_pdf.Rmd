@@ -2,7 +2,7 @@
 title: "Informe Western Union"
 author: "Fernando Leutloff"
 date: "`r Sys.Date()`"
-output: html_document
+output: pdf_document
 ---
     
     
@@ -34,6 +34,8 @@ install.packages("ggplot2")
 install.packages("patchwork")
 install.packages("gganimate")
 install.packages(c('gapminder','ggplot2','gganimate','gifski'))
+install.packages("purrr")
+install.packages("purrrsive")
 
 ```
 
@@ -49,10 +51,23 @@ library(gganimate)
 library(gapminder)
 library(gganimate)
 library(gifski)
+library(purrr)
+
+
 ```
 
 <br>  
 <br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+
+
 
 ##### Nuestro DF
 ```{r echo=FALSE}
@@ -67,6 +82,9 @@ WU <-
 
 head(WU)
 ```
+
+<br>  
+<br>  
 
 ## Gráficos de calificaciones
 Analizamos con un gráfico de barras la diferencia de calificaciones entre las sucursales:
@@ -84,10 +102,13 @@ gb_cal
 
 Podemos observar, como se ha expuesto en la introducción, que las sucursales de **Buenos Aires** obtienen mayor cantidad de **calificaciones bajas**, mientras que en **Bariloche** obtienen calificaciones **mayormente altas**.
 
+
+#### Agregamos al gráfico la variante de **fechas** para evaluar qué sucede en diferentes épocas del año.
+<br>  
+<br>  
 <br>  
 <br>  
 
-#### Agregamos al gráfico la variante de **fechas** para evaluar qué sucede en diferentes épocas del año.
 
 ``` {r echo=FALSE}
 
@@ -118,12 +139,36 @@ El aumento de opiniones negativas, a pesar de la cantidad de opiniones positivas
 
 <br>  
 <br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
 
 
 Calculando un promedio de calificaciones, el gráfico que obtenemos es el siguiente:
 <br>  
 
 ``` {r echo=FALSE, message=FALSE}
+
+
 wu_cal <-
   WU%>%
   group_by(Fecha, Sucursal) %>%
@@ -134,11 +179,9 @@ grafico <- ggplot(data=wu_cal, aes(x=Fecha, y=Cal_med, color=Sucursal))+
   geom_line()+
   geom_point()+
   scale_color_manual(values=c("blue", "red"))+
-  labs(title="Calificaciones Buenos Aires vs Bariloche", x="Fecha", y="Calificación")+
-  transition_reveal(Fecha)
+  labs(title="Calificaciones Buenos Aires vs Bariloche", x="Fecha", y="Calificación")
 
-animate(plot=grafico, render=gifski_renderer(), height=400, width=600, duration=5, fps=20)
-anim_save("grafico.gif")
+grafico
 
 ```
 
@@ -288,8 +331,14 @@ bsas_q
 Con estos datos podemos concluir que el problema en Buenos Aires radica **específicamente en la atención recibida y la demora**.
 <br>  
 <br>  
+<br>  
+<br>  
+<br>  
+<br>  
 
 #### ¿Qué sucede en Bariloche?
+<br>  
+<br>  
 Veamos nuevamente el gráfico:
 
 ``` {r echo=FALSE, message=FALSE}
